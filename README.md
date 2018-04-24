@@ -1,8 +1,10 @@
 # 2018-gitech-introsonicpi
 
-Taller de introducció a Sonic Pi - [Gitech 2018](http://gitech.cat)
+Taller de introducció a Sonic Pi - [Gitech 2018](http://gitech.cat), basat en el [mehackit Sonic Pi workshop](http://sonic-pi.mehackit.org)
 
 Material accessible en forma de [Jupyter notebook](http://nbviewer.ipython.org/github/victormartingarcia/2018-gitech-introsonicpi/blob/master/sonicpi_introduction.ipynb) o [Reveal.js slides](http://nbviewer.ipython.org/format/slides/github/victormartingarcia/2018-gitech-introsonicpi/blob/master/sonicpi_introduction.ipynb?transition=cube#/) 
+
+Per executar el notebook cal seguir les passes d'instal.lació de https://github.com/victormartingarcia/sonicpi-jupyter-notebook
 
 Referències:
 
