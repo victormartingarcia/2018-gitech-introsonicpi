@@ -11927,7 +11927,7 @@ a.anchor-link {
 </CENTER>
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11951,65 +11951,41 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">live_loop</span> <span class="ss">:low</span> <span class="k">do</span> <span class="o">|</span><span class="n">idx</span><span class="o">|</span>
+  <span class="c1">#  idx = 0</span>
+  <span class="n">synth</span> <span class="ss">:zawa</span><span class="p">,</span> <span class="ss">wave</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">invert_wave</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">phase</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="ss">note</span><span class="p">:</span> <span class="ss">:e1</span><span class="p">,</span> <span class="ss">cutoff</span><span class="p">:</span> <span class="p">(</span><span class="n">range</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span>
+  <span class="nb">sleep</span> <span class="mi">4</span>
+  <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">end</span>
 
-<span class="s2">live_loop :low do |idx|</span>
-<span class="s2">  #  idx = 0</span>
-<span class="s2">  synth :zawa, wave: 1, invert_wave: 1, phase: 0.25, release: 5, note: :e1, cutoff: (range 60, 120, 10)[idx]</span>
-<span class="s2">  sleep 4</span>
-<span class="s2">  idx += 1</span>
-<span class="s2">end</span>
+<span class="n">live_loop</span> <span class="ss">:lands</span><span class="p">,</span> <span class="ss">auto_cue</span><span class="p">:</span> <span class="kp">false</span> <span class="k">do</span> <span class="o">|</span><span class="n">idx</span><span class="o">|</span>
+  <span class="n">use_synth</span> <span class="ss">:dsaw</span>
+  <span class="n">use_random_seed</span> <span class="mi">66679</span>
+  <span class="n">with_fx</span> <span class="ss">:reverb</span><span class="p">,</span> <span class="ss">room</span><span class="p">:</span> <span class="mi">1</span>  <span class="k">do</span>
+    <span class="mi">16</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+      <span class="n">ns</span> <span class="o">=</span> <span class="p">(</span><span class="n">scale</span> <span class="ss">:e2</span><span class="p">,</span> <span class="ss">:minor_pentatonic</span><span class="p">,</span> <span class="ss">num_octaves</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">play</span> <span class="n">ns</span><span class="o">.</span><span class="n">choose</span><span class="p">,</span> <span class="ss">detune</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="ss">amp</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">amp</span><span class="p">:</span> <span class="nb">rand</span> <span class="o">+</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="ss">cutoff</span><span class="p">:</span> <span class="n">rrand</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+      <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">125</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class="s2">live_loop :lands, auto_cue: false do |idx|</span>
-<span class="s2">  use_synth :dsaw</span>
-<span class="s2">  use_random_seed 66679</span>
-<span class="s2">  with_fx :reverb, room: 1  do</span>
-<span class="s2">    16.times do</span>
-<span class="s2">      ns = (scale :e2, :minor_pentatonic, num_octaves: 3)</span>
-<span class="s2">      play ns.choose, detune: 12, release: 0.1, amp: 2, amp: rand + 0.5, cutoff: rrand(70, 120)</span>
-<span class="s2">      sleep 0.125</span>
-<span class="s2">    end</span>
-<span class="s2">  end</span>
-<span class="s2">end</span>
+<span class="n">live_loop</span> <span class="ss">:bikes</span> <span class="k">do</span> <span class="o">|</span><span class="n">idx</span><span class="o">|</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="n">sample</span> <span class="ss">:guit_em9</span><span class="p">,</span> <span class="ss">rate</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="nb">sleep</span> <span class="mi">7</span><span class="o">.</span><span class="mi">75</span>
+<span class="k">end</span>
 
-<span class="s2">live_loop :bikes do |idx|</span>
-<span class="s2">  sleep 0.25</span>
-<span class="s2">  sample :guit_em9, rate: -1</span>
-<span class="s2">  sleep 7.75</span>
-<span class="s2">end</span>
-
-<span class="s2">live_loop :time, auto_cue: false do |idx|</span>
-<span class="s2">  sample :bd_haus, amp: 2.5</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">end</span>
-
-<span class="s2">&quot;</span>
+<span class="n">live_loop</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">auto_cue</span><span class="p">:</span> <span class="kp">false</span> <span class="k">do</span> <span class="o">|</span><span class="n">idx</span><span class="o">|</span>
+  <span class="n">sample</span> <span class="ss">:bd_haus</span><span class="p">,</span> <span class="ss">amp</span><span class="p">:</span> <span class="mi">2</span><span class="o">.</span><span class="mi">5</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>704</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12056,7 +12032,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12073,44 +12049,20 @@ a.anchor-link {
 <h1 id="Fer-sonar-una-nota">Fer sonar una nota<a class="anchor-link" href="#Fer-sonar-una-nota">&#182;</a></h1>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
-
-<span class="s2">play 60</span>
-
-<span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="mi">60</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[19]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>44</pre>
 </div>
-
-</div>
-
-</div>
-</div>
-
-</div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12119,17 +12071,21 @@ a.anchor-link {
 
 </div>
 </div>
-</div></div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Notes-Midi">Notes Midi<a class="anchor-link" href="#Notes-Midi">&#182;</a></h1><p>Sonic Pi entén notes MIDI (valors de <em>0</em> a <em>127</em>) i notació musical tradicional (<em>:C4</em>, <em>:Eb3</em>, <em>:G5</em>...)</p>
+<h1 id="Notes-Midi">Notes Midi<a class="anchor-link" href="#Notes-Midi">&#182;</a></h1><p>Sonic Pi entén:</p>
+<ol>
+<li>notes MIDI (valors de <em>0</em> a <em>127</em>) </li>
+<li>notació musical tradicional (<em>:C4</em>, <em>:Eb3</em>, <em>:G5</em>...)</li>
+</ol>
 <p><img src="images/midi_notes.png"/></p>
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12141,39 +12097,15 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
-
-<span class="s2">play 60</span>
-<span class="s2">play 67</span>
-<span class="s2">play 69</span>
-
-<span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="mi">60</span>
+<span class="n">play</span> <span class="mi">67</span>
+<span class="n">play</span> <span class="mi">69</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>60</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12198,45 +12130,21 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
-
-<span class="s2">play 60</span>
-<span class="s2">sleep 1</span>
-<span class="s2">play 67</span>
-<span class="s2">sleep 1</span>
-<span class="s2">play 69</span>
-
-<span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="mi">60</span>
+<span class="nb">sleep</span> <span class="mi">1</span>
+<span class="n">play</span> <span class="mi">67</span>
+<span class="nb">sleep</span> <span class="mi">1</span>
+<span class="n">play</span> <span class="mi">69</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>76</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12248,7 +12156,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12259,58 +12167,34 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">40</span>
 
-<span class="s2">use_bpm 40</span>
-
-<span class="s2">play 72</span>
-<span class="s2">sleep 0.25</span>
-<span class="s2">play 76</span>
-<span class="s2">sleep 0.25</span>
-<span class="s2">play 76</span>
-<span class="s2">sleep 0.25</span>
-<span class="s2">play 72</span>
-<span class="s2">sleep 0.5</span>
-<span class="s2">play 83</span>
-<span class="s2">sleep 0.25</span>
-<span class="s2">play 74</span>
-<span class="s2">sleep 0.25</span>
-<span class="s2">play 83</span>
-<span class="s2">sleep 0.25</span>
-<span class="s2">play 79</span>
-<span class="s2">play 84</span>
-
-<span class="s2">&quot;</span>
+<span class="n">play</span> <span class="mi">72</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="mi">76</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="mi">76</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="mi">72</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="n">play</span> <span class="mi">83</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="mi">74</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="mi">83</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="mi">79</span>
+<span class="n">play</span> <span class="mi">84</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[24]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>196</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12322,46 +12206,22 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
-
-<span class="s2">2.times do</span>
-<span class="s2">  play :c4</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">  play :d4</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">  play :e4</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">  play :c4</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">end</span>
-
-<span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="mi">2</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="n">play</span> <span class="ss">:c4</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+  <span class="n">play</span> <span class="ss">:d4</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+  <span class="n">play</span> <span class="ss">:e4</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+  <span class="n">play</span> <span class="ss">:c4</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[25]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>144</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12377,46 +12237,22 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
-
-<span class="s2">4.times do</span>
-<span class="s2">  4.times do</span>
-<span class="s2">    play :c4</span>
-<span class="s2">    sleep 0.25</span>
-<span class="s2">  end</span>
-<span class="s2">  play :d4</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">  play :f4</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">end</span>
-
-<span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+    <span class="n">play</span> <span class="ss">:c4</span>
+    <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="k">end</span>
+  <span class="n">play</span> <span class="ss">:d4</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+  <span class="n">play</span> <span class="ss">:f4</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[26]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>144</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12434,7 +12270,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12450,14 +12286,10 @@ Necessitem dues coses noves <strong>live_loop</strong> i <strong>sample</strong>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
-
-<span class="s2">live_loop :drums do</span>
-<span class="s2">  sample :drum_heavy_kick</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">end</span>
-
-<span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">live_loop</span> <span class="ss">:drums</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
@@ -12477,7 +12309,7 @@ Necessitem dues coses noves <strong>live_loop</strong> i <strong>sample</strong>
 
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12492,22 +12324,18 @@ Necessitem dues coses noves <strong>live_loop</strong> i <strong>sample</strong>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">100</span>
 
-<span class="s2">use_bpm 100</span>
-
-<span class="s2">live_loop :drums do</span>
-<span class="s2">  sample :drum_heavy_kick</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">  sample :drum_snare_hard</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">  sample :drum_heavy_kick</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">  sample :drum_snare_hard</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">end</span>
-
-<span class="s2">&quot;</span>
+<span class="n">live_loop</span> <span class="ss">:drums</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
@@ -12523,7 +12351,7 @@ Necessitem dues coses noves <strong>live_loop</strong> i <strong>sample</strong>
 
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12534,55 +12362,29 @@ Necessitem dues coses noves <strong>live_loop</strong> i <strong>sample</strong>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">sonicpi_code</span> <span class="s2">&quot;</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">100</span>
 
-<span class="s2">use_bpm 100</span>
+<span class="n">live_loop</span> <span class="ss">:drums</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
 
-<span class="s2">live_loop :drums do</span>
-<span class="s2">  sample :drum_heavy_kick</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">  sample :drum_snare_hard</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">  sample :drum_heavy_kick</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">  sample :drum_snare_hard</span>
-<span class="s2">  sleep 1</span>
-<span class="s2">end</span>
-
-<span class="s2">live_loop :hats do</span>
-<span class="s2">  sample :drum_cymbal_closed</span>
-<span class="s2">  sleep 0.5</span>
-<span class="s2">end</span>
-
-
-
-<span class="s2">&quot;</span>
+<span class="n">live_loop</span> <span class="ss">:hats</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_cymbal_closed</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[49]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>284</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12591,7 +12393,315 @@ Necessitem dues coses noves <strong>live_loop</strong> i <strong>sample</strong>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Gr&#224;cies-per-escoltar!-Preguntes?">Gr&#224;cies per escoltar! Preguntes?<a class="anchor-link" href="#Gr&#224;cies-per-escoltar!-Preguntes?">&#182;</a></h2><ul>
+<h1 id="Bonus!-dembow-rhythm-(Reggaeton)">Bonus! dembow rhythm (Reggaeton)<a class="anchor-link" href="#Bonus!-dembow-rhythm-(Reggaeton)">&#182;</a></h1><h1 id="&#9762;&#65039;&#9760;&#65039;-----&#128131;&#128378;&#128111;&#128131;-----&#9760;&#65039;&#9762;&#65039;">&#9762;&#65039;&#9760;&#65039;     &#128131;&#128378;&#128111;&#128131;     &#9760;&#65039;&#9762;&#65039;<a class="anchor-link" href="#&#9762;&#65039;&#9760;&#65039;-----&#128131;&#128378;&#128111;&#128131;-----&#9760;&#65039;&#9762;&#65039;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">95</span>
+
+<span class="n">live_loop</span> <span class="ss">:kick</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:bd_haus</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="n">live_loop</span> <span class="ss">:snare</span> <span class="k">do</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
+
+<span class="n">live_loop</span> <span class="ss">:hats</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_cymbal_closed</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Bass-track">Bass track<a class="anchor-link" href="#Bass-track">&#182;</a></h1><p>Afegim un altre <em>live_loop</em> per els nostres baixos. Composarem un groove de baix simple però sòlid.</p>
+<p>Pots fer servir aquest <a href="http://sonic-pi.mehackit.org/exercises/en/09-keys-chords-and-scales/01-piano.html">piano dins el browser</a> per ajudar-te a escollir les notes:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">95</span>
+
+<span class="n">live_loop</span> <span class="ss">:bass</span> <span class="k">do</span>
+  <span class="n">play</span> <span class="ss">:c2</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="n">play</span> <span class="ss">:c2</span>
+  <span class="nb">sleep</span> <span class="mi">2</span>
+  <span class="n">play</span> <span class="ss">:e2</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+  <span class="n">play</span> <span class="ss">:f2</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Canvi-de-sinte">Canvi de sinte<a class="anchor-link" href="#Canvi-de-sinte">&#182;</a></h1><p>És el moment de fer que la nostra cançó soni més interessant! Podem fer-ho canviant el sons que el sintetitzador està fent servir. 
+El synth per defecte que fa servir Sonic Pi es diu <em>beep</em>. Podem canviar-lo amb el codi <em>use_synth</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">live_loop</span> <span class="ss">:bass</span> <span class="k">do</span>
+  <span class="n">use_synth</span> <span class="ss">:fm</span>
+  <span class="n">play</span> <span class="ss">:c2</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="n">play</span> <span class="ss">:c2</span>
+  <span class="nb">sleep</span> <span class="mi">2</span>
+  <span class="n">play</span> <span class="ss">:e2</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+  <span class="n">play</span> <span class="ss">:f2</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hem utilitzat el synth :fm, però Sonic Pi en conté molts d'altres. Podem veure el llistat amb una mica d'explicació de cada <em>sinte</em> a la ajuda</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Canviar-la-durada-de-les-notes">Canviar la durada de les notes<a class="anchor-link" href="#Canviar-la-durada-de-les-notes">&#182;</a></h1><p>En ocasions, voldrem produir sons més llargs o a velocitat diferent. Ho podem fer amb els paràmetres opcionals <strong>attack</strong> i <strong>release</strong>, que controlen la amplitud d'una nota en funció del temps</p>
+<p><img src="images/attackrelease.png"/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="c1"># Exemple 1 - Nota de 4 &#39;beats&#39; de durada:</span>
+<span class="n">play</span> <span class="mi">60</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">3</span>
+
+<span class="c1"># Exemple 2 - Petit &#39;staccato&#39;:</span>
+<span class="n">play</span> <span class="mi">60</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="El-nostre-groove-de-baix">El nostre groove de baix<a class="anchor-link" href="#El-nostre-groove-de-baix">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">live_loop</span> <span class="ss">:bass</span> <span class="k">do</span>
+  <span class="n">use_synth</span> <span class="ss">:fm</span>
+  <span class="n">play</span> <span class="ss">:c2</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="n">play</span> <span class="ss">:c2</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span>
+  <span class="nb">sleep</span> <span class="mi">2</span>
+  <span class="n">play</span> <span class="ss">:e2</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+  <span class="n">play</span> <span class="ss">:f2</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Lead-track">Lead track<a class="anchor-link" href="#Lead-track">&#182;</a></h1><p>Ha arribat el moment de crear la nostra melodía. En comptes de escriure una pila de comandes <em>play</em> i <em>sleep</em>, farem servir una dreçera: <strong>play_pattern_timed</strong></p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>en comptes de:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="ss">:c2</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="n">play</span> <span class="ss">:d2</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+<span class="n">play</span> <span class="ss">:e2</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+<span class="n">play</span> <span class="ss">:d2</span>
+<span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>pots escriure:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play_pattern_timed</span> <span class="o">[</span><span class="ss">:c2</span><span class="p">,</span> <span class="ss">:d2</span><span class="p">,</span> <span class="ss">:e2</span><span class="p">,</span> <span class="ss">:d2</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="o">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="La-nostra-melodia">La nostra melodia<a class="anchor-link" href="#La-nostra-melodia">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">live_loop</span> <span class="ss">:melody</span> <span class="k">do</span>
+  <span class="n">play_pattern_timed</span> <span class="o">[</span><span class="ss">:c4</span><span class="p">,</span> <span class="ss">:e4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:g4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:e4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:g4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:e4</span><span class="p">,</span> <span class="ss">:f4</span><span class="o">]</span><span class="p">,</span> <span class="p">\</span>
+    <span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="o">]</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Aleatoritzaci&#243;-i-m&#250;sica-generativa">Aleatoritzaci&#243; i m&#250;sica generativa<a class="anchor-link" href="#Aleatoritzaci&#243;-i-m&#250;sica-generativa">&#182;</a></h1><p>Aquí rau la verdadera potència de Sonic Pi! Podem afegir components aleatoris a la nostra música per a que es generi <em>en directe</em>!</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">50</span>
+
+<span class="n">live_loop</span> <span class="ss">:multi_beat</span> <span class="k">do</span>
+    <span class="n">use_random_seed</span> <span class="mi">2000</span>
+    <span class="mi">8</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+      <span class="n">c</span> <span class="o">=</span> <span class="n">rrand</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">scale</span> <span class="ss">:e1</span><span class="p">,</span> <span class="ss">:minor_pentatonic</span><span class="p">)</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">choose</span>
+      <span class="n">synth</span> <span class="ss">:tb303</span><span class="p">,</span> <span class="ss">note</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="ss">cutoff</span><span class="p">:</span> <span class="n">c</span> <span class="k">if</span> <span class="nb">rand</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span>
+      <span class="n">sample</span> <span class="ss">:elec_hi_snare</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+      <span class="n">sample</span> <span class="ss">:drum_cymbal_closed</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+      <span class="n">sample</span> <span class="ss">:drum_cymbal_pedal</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+      <span class="n">sample</span> <span class="ss">:bd_haus</span><span class="p">,</span> <span class="ss">amp</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">5</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+      <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">125</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Altres-funcionalitats-avan&#231;ades-de-Sonic-Pi">Altres funcionalitats avan&#231;ades de Sonic Pi<a class="anchor-link" href="#Altres-funcionalitats-avan&#231;ades-de-Sonic-Pi">&#182;</a></h1><ul>
+<li>Escales i acords</li>
+<li>Efectes de so - FX (reverb, delay, overdrive...)</li>
+<li>variables i mètodes</li>
+<li>Estructures de dades especials (<em>ring</em>, <em>tick</em>...)</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Gr&#224;cies-per-escoltar!-Preguntes?">Gr&#224;cies per escoltar! Preguntes?<a class="anchor-link" href="#Gr&#224;cies-per-escoltar!-Preguntes?">&#182;</a></h2><p>Ens veiem al fòrum oficial de Sonic Pi! <a href="https://in-thread.sonic-pi.net/">https://in-thread.sonic-pi.net/</a></p>
+<ul>
 <li><a href="https://github.com/victormartingarcia">https://github.com/victormartingarcia</a></li>
 <li><a href="mailto:mailto:victor.martin.garcia@gmail.com">mailto:victor.martin.garcia@gmail.com</a></li>
 <li><a href="https://twitter.com/victormartin">@victormartin</a></li>
