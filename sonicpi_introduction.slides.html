@@ -11945,7 +11945,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Qu&#232;-es-pot-fer-amb-Sonic-Pi?">Qu&#232; es pot fer amb Sonic Pi?<a class="anchor-link" href="#Qu&#232;-es-pot-fer-amb-Sonic-Pi?">&#182;</a></h1>
+<h1 id="Qu&#232;-es-pot-fer-amb-Sonic-Pi?-&#128558;&#128558;&#128558;&#128558;">Qu&#232; es pot fer amb Sonic Pi? &#128558;&#128558;&#128558;&#128558;<a class="anchor-link" href="#Qu&#232;-es-pot-fer-amb-Sonic-Pi?-&#128558;&#128558;&#128558;&#128558;">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -12009,14 +12009,6 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Va començar com un experiment per <em>ensenyar conceptes de programació</em> a les escoles, tot jugant amb el procés de crear <em>nous sons</em></p>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p>Ha evolucionat en un potent <em>instrument musical programat</em>, utilitzat per artistes professionals i DJs</p>
 
 </div>
@@ -12100,7 +12092,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="mi">60</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="ss">:C4</span>
 <span class="n">play</span> <span class="mi">67</span>
 <span class="n">play</span> <span class="mi">69</span>
 </pre></div>
@@ -12133,7 +12125,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="mi">60</span>
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">play</span> <span class="ss">:C4</span>
 <span class="nb">sleep</span> <span class="mi">1</span>
 <span class="n">play</span> <span class="mi">67</span>
 <span class="nb">sleep</span> <span class="mi">1</span>
@@ -12645,6 +12637,66 @@ El synth per defecte que fa servir Sonic Pi es diu <em>beep</em>. Podem canviar-
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Ja-tenim-la-nostra-can&#231;&#243;-acabada-&#129304;&#128526;&#129304;">Ja tenim la nostra can&#231;&#243; acabada &#129304;&#128526;&#129304;<a class="anchor-link" href="#Ja-tenim-la-nostra-can&#231;&#243;-acabada-&#129304;&#128526;&#129304;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">100</span>
+
+<span class="c1">### ===== DRUMS ==========</span>
+
+<span class="n">live_loop</span> <span class="ss">:drums</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_heavy_kick</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="n">sample</span> <span class="ss">:drum_snare_hard</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="n">live_loop</span> <span class="ss">:hats</span> <span class="k">do</span>
+  <span class="n">sample</span> <span class="ss">:drum_cymbal_closed</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+<span class="k">end</span>
+
+<span class="c1">### ===== BASS ==========</span>
+
+<span class="n">live_loop</span> <span class="ss">:bass</span> <span class="k">do</span>
+  <span class="n">use_synth</span> <span class="ss">:fm</span>
+  <span class="n">play</span> <span class="ss">:c2</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span>
+  <span class="n">play</span> <span class="ss">:c2</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span>
+  <span class="nb">sleep</span> <span class="mi">2</span>
+  <span class="n">play</span> <span class="ss">:e2</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">75</span>
+  <span class="n">play</span> <span class="ss">:f2</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="c1">### ===== LEAD ==========</span>
+
+<span class="n">live_loop</span> <span class="ss">:melody</span> <span class="k">do</span>
+  <span class="n">play_pattern_timed</span> <span class="o">[</span><span class="ss">:c4</span><span class="p">,</span> <span class="ss">:e4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:g4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:e4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:g4</span><span class="p">,</span> <span class="ss">:f4</span><span class="p">,</span> <span class="ss">:e4</span><span class="p">,</span> <span class="ss">:f4</span><span class="o">]</span><span class="p">,</span> <span class="p">\</span>
+    <span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">25</span><span class="o">]</span><span class="p">,</span> <span class="ss">attack</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12663,18 +12715,18 @@ El synth per defecte que fa servir Sonic Pi es diu <em>beep</em>. Podem canviar-
 <div class=" highlight hl-ruby"><pre><span></span><span class="n">use_bpm</span> <span class="mi">50</span>
 
 <span class="n">live_loop</span> <span class="ss">:multi_beat</span> <span class="k">do</span>
-    <span class="n">use_random_seed</span> <span class="mi">2000</span>
-    <span class="mi">8</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
-      <span class="n">c</span> <span class="o">=</span> <span class="n">rrand</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
-      <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">scale</span> <span class="ss">:e1</span><span class="p">,</span> <span class="ss">:minor_pentatonic</span><span class="p">)</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">choose</span>
-      <span class="n">synth</span> <span class="ss">:tb303</span><span class="p">,</span> <span class="ss">note</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="ss">cutoff</span><span class="p">:</span> <span class="n">c</span> <span class="k">if</span> <span class="nb">rand</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span>
-      <span class="n">sample</span> <span class="ss">:elec_hi_snare</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-      <span class="n">sample</span> <span class="ss">:drum_cymbal_closed</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-      <span class="n">sample</span> <span class="ss">:drum_cymbal_pedal</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-      <span class="n">sample</span> <span class="ss">:bd_haus</span><span class="p">,</span> <span class="ss">amp</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">5</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-      <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">125</span>
-    <span class="k">end</span>
+  <span class="n">use_random_seed</span> <span class="mi">2000</span>
+  <span class="mi">8</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">rrand</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">130</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">scale</span> <span class="ss">:e1</span><span class="p">,</span> <span class="ss">:minor_pentatonic</span><span class="p">)</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">choose</span>
+    <span class="n">synth</span> <span class="ss">:tb303</span><span class="p">,</span> <span class="ss">note</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span> <span class="ss">release</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="ss">cutoff</span><span class="p">:</span> <span class="n">c</span> <span class="k">if</span> <span class="nb">rand</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span>
+    <span class="n">sample</span> <span class="ss">:elec_hi_snare</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="ss">:drum_cymbal_closed</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="ss">:drum_cymbal_pedal</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="ss">:bd_haus</span><span class="p">,</span> <span class="ss">amp</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">5</span> <span class="k">if</span> <span class="n">one_in</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">125</span>
   <span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 
 </div>
